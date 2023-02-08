@@ -22,11 +22,11 @@ public class Main {
 					+ "regions.name as nome_regione, " + "continents.name as nome_continente\n" + "FROM countries \n"
 					+ "Inner join regions \n" + "on countries.region_id  = regions.region_id  \n"
 					+ "Inner join continents \n" + "on regions.continent_id = continents.continent_id \n"
-					+"WHERE countries.name LIKE ?"
+					+"WHERE countries.name LIKE \n ?"
 					+ "Order by countries.name ";
 
 			try (PreparedStatement ps = con.prepareStatement(sql)) {
-				ps.setString(1, ricercationName);
+				ps.setString(1, "%"+ricercationName+"%");
 
 				try (ResultSet rs = ps.executeQuery()) {
 
